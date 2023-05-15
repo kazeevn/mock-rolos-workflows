@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "Mock Rolos Workflows",
+    "description": "Replaces Rolos workflows with mocks, leaving empty husks to be presented to unsuspecting audience",
+    "version": "1.0",
+    "action": {
+      "default_popup": "button.html"
+    },
+    "permissions": ["activetab", "scripting"],
+    "host_permissions": ["https://my.rolos.com/api/v1/*"],
+    "icons": {
+        "16": "images/robot_jester_16.png",
+        "32": "images/robot_jester_32.png",
+        "48": "images/robot_jester_48.png",
+        "128": "images/robot_jester_128.png"
+      }
+  }
