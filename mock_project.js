@@ -79,7 +79,7 @@ async function mock_node(node_id) {
           "sec-fetch-mode": "cors",
           "sec-fetch-site": "same-origin"
         },
-        "body": "{\"cpu_count\":1,\"gpu\":false,\"ram\":2,\"type\":\"environment\",\"file_id\":\"/mock.sh\"}",
+        "body": "{\"cpu_count\":2,\"gpu\":false,\"ram\":3,\"type\":\"environment\",\"file_id\":\"/mock.sh\"}",
         "method": "PATCH",
         "mode": "cors",
         "credentials": "include"
