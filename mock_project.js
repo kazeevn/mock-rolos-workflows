@@ -5,14 +5,15 @@
 // NO WARRANTY WHATSOEVER
 
 function mock_current_project() {
+    c = document.getElementById("script_overwrite");
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
         let project_url = new URL(tabs[0].url);
         const project_id = project_url.pathname.split("/")[2];
         console.log(`Project ${project_id}`);
         mock_project(project_id).then(() => {
             alert("Project mocked!");
-            //  document.getElementById('content').innerHTML = "<img src='images/complete.png' alt='Robot jester having fun' width='256px' height='256px'>"; 
-            //    chrome.windows.create({'url': 'complete.html', 'type': 'popup'})
+            // document.getElementById('content').innerHTML = "<img src='images/complete.png' alt='Robot jester having fun' width='256px' height='256px'>"; 
+            // chrome.windows.create({'url': 'complete.html', 'type': 'popup'})
         });
     });
     // If not in a extension context, use this instead
@@ -67,6 +68,11 @@ async function mock_workflow(workflow_id) {
 }
 
 async function mock_node(node_id) {
+    body = {"cpu_count":2, "gpu":false, "ram":3, "type": "environment"};
+    const c = document.getElementById("script_overwrite");
+    if (c.checked) {
+        body['file_id'] = "/mock.sh";
+    };
     fetch(`https://my.rolos.com/api/v1/workflows/nodes/${node_id}`, {
         "headers": {
           "accept": "*/*",
@@ -79,12 +85,12 @@ async function mock_node(node_id) {
           "sec-fetch-mode": "cors",
           "sec-fetch-site": "same-origin"
         },
-        "body": "{\"cpu_count\":2,\"gpu\":false,\"ram\":3,\"type\":\"environment\",\"file_id\":\"/mock.sh\"}",
+        "body": JSON.stringify(body),
         "method": "PATCH",
         "mode": "cors",
         "credentials": "include"
       });
 };
 
-const button = document.querySelector("button");
-button.addEventListener("click", mock_current_project());
+button = document.getElementById("start_mocking");
+button.addEventListener("click", mock_current_project);
